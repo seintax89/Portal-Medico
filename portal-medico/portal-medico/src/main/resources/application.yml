@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://db.fvmrqnaajwwahgcgyzhx.supabase.co:5432/postgres?sslmode=require
-    username: postgres
-    password: Dasafego2007
+    url: jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres?user=postgres.fvmrqnaajwwahgcgyzhx&password=Dasafego2007
+    username: AQUI_EL_USERNAME_DEL_POOLER
+    password: AQUI_TU_PASSWORD
     driver-class-name: org.postgresql.Driver
 
   jpa:

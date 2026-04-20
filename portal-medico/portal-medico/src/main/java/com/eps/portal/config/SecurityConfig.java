@@ -57,7 +57,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Agregamos los puertos comunes de Vite (5173) y React tradicional (3000)
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000","https://AQUI_IRA_TU_FRONTEND.vercel.app"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000","https://portal-medico.vercel.app"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "x-auth-token"));
         configuration.setExposedHeaders(List.of("x-auth-token"));

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://AQUI_IRA_TU_BACKEND.onrender.com/api',
+    baseURL: 'https://portal-medico-uicj.onrender.com',
     headers: {
         'Content-Type': 'application/json'
     }

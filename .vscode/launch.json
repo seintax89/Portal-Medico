@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PortalMedicoApplication<portal-medico>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.eps.portal.PortalMedicoApplication",
+            "projectName": "portal-medico",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

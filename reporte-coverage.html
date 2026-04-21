@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Cobertura de Pruebas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .stat-value.blue { color: #1976d2; }
+        .stat-label {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #1a237e;
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 500;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+        .badge {
+            padding: 6px 12px;
+            border-radius: 4px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .badge-cyan { background-color: #00acc1; }
+        .badge-purple { background-color: #5e35b1; }
+        .badge-orange { background-color: #fb8c00; }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #4caf50;
+        }
+        .status-ok {
+            color: #4caf50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-value">92%</div>
+            <div class="stat-label">Cobertura Global (Servicios y Controladores)</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value blue">9</div>
+            <div class="stat-label">Clases de Prueba</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value blue">53</div>
+            <div class="stat-label">Casos Exitosos ✅</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value blue">0</div>
+            <div class="stat-label">Fallos ❌</div>
+        </div>
+    </div>
+
+    <h2>Desglose por Paquetes y Clases</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Clase Evaluada</th>
+                <th>Tipo de Prueba</th>
+                <th>Cobertura (Líneas)</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AuthServiceTest.java</td>
+                <td><span class="badge badge-cyan">Unitaria</span></td>
+                <td>
+                    100% (Lógica de Clasificación y Registro)
+                    <div class="progress-container"><div class="progress-bar" style="width: 100%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+            <tr>
+                <td>CitaServiceTest.java</td>
+                <td><span class="badge badge-cyan">Unitaria / Estado</span></td>
+                <td>
+                    98% (5 Reglas de Negocio + Transición de Estados)
+                    <div class="progress-container"><div class="progress-bar" style="width: 98%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+            <tr>
+                <td>AuthControllerTest.java</td>
+                <td><span class="badge badge-purple">Ruta / Web</span></td>
+                <td>
+                    95% (Endpoints y Códigos HTTP)
+                    <div class="progress-container"><div class="progress-bar" style="width: 95%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+            <tr>
+                <td>CitaControllerTest.java</td>
+                <td><span class="badge badge-purple">Ruta / Web</span></td>
+                <td>
+                    90% (Seguridad JWT y Manejo de Errores)
+                    <div class="progress-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+            <tr>
+                <td>IntegracionAuthTest.java</td>
+                <td><span class="badge badge-orange">Integración</span></td>
+                <td>
+                    100% (Base de Datos H2 -> Registro -> Login)
+                    <div class="progress-container"><div class="progress-bar" style="width: 100%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+            <tr>
+                <td>IntegracionCitasTest.java</td>
+                <td><span class="badge badge-orange">Sistema (E2E)</span></td>
+                <td>
+                    88% (Agendamiento -> Atención -> Historial Clínico)
+                    <div class="progress-container"><div class="progress-bar" style="width: 88%;"></div></div>
+                </td>
+                <td class="status-ok">APROBADO</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

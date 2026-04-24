@@ -92,7 +92,6 @@ public class AuthService {
 
         // 3. Crear Perfil Profesional (Tabla medicos)
         Medico medico = new Medico();
-        medico.setUsuarioId(usuarioGuardado.getId());
         medico.setUsuario(usuarioGuardado);
         medico.setNombres(request.getNombres());
         medico.setApellidos(request.getApellidos());

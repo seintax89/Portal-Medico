@@ -9,6 +9,7 @@ C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-med
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\dto\request\FormulaMedicaRequest.java
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\dto\request\RegistroPacienteRequest.java
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\PortalMedicoApplication.java
+C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\exception\GlobalExceptionHandler.java
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\dto\response\HistorialClinicoResponse.java
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\controller\CitaController.java
 C:\Users\david\OneDrive\Documents\Ing Software Proyecto\portal-medico\portal-medico\src\main\java\com\eps\portal\dto\request\CitaRequest.java

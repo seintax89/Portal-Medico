@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres?user=postgres.fvmrqnaajwwahgcgyzhx&password=Dasafego2007
-    username: AQUI_EL_USERNAME_DEL_POOLER
-    password: AQUI_TU_PASSWORD
+    username: postgres.fvmrqnaajwwahgcgyzhx
+    password: Dasafego2007
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 2

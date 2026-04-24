@@ -13,6 +13,8 @@ const DashboardPaciente = () => {
     const [error, setError] = useState('');
     const [cargando, setCargando] = useState(false);
 
+    const [citas, setCitas] = useState([]);
+
     const cargarDatos = async () => {
         setError('');
         try {
@@ -24,6 +26,22 @@ const DashboardPaciente = () => {
             setEspecialidades(especialidadesRes.data || []);
         } catch (err) {
             setError(err.response?.data?.mensaje || 'No se pudo cargar la información del paciente.');
+        }
+
+        try {
+            const citasRes = await api.get('/citas/mis-citas');
+            setCitas(citasRes.data || []);
+        } catch (err) {
+            console.error('El endpoint de citas aún no está disponible:', err);
+        }
+    };
+
+    const cargarCitas = async () => {
+        try {
+            const citasRes = await api.get('/citas/mis-citas');
+            setCitas(citasRes.data || []);
+        } catch (err) {
+            console.error('No se pudieron cargar las citas.', err);
         }
     };
 
@@ -70,6 +88,7 @@ const DashboardPaciente = () => {
             setMensaje(`Cita programada exitosamente con ${res.data.nombreMedico} para ${new Date(res.data.fechaHora).toLocaleString()}.`);
             setMedicoId('');
             setFechaHora('');
+            cargarCitas();
         } catch (err) {
             const msg = typeof err.response?.data === 'string' ? err.response.data : err.response?.data?.mensaje;
             setError(msg || 'No se pudo agendar la cita.');
@@ -155,6 +174,24 @@ const DashboardPaciente = () => {
                     </div>
                 ) : (
                     <div className="empty-state">No hay médicos disponibles para el filtro seleccionado.</div>
+                )}
+            </section>
+
+            <section className="card" style={{ marginTop: 18 }}>
+                <h2>Mis citas</h2>
+                {citas.length > 0 ? (
+                    <div className="list">
+                        {citas.map((cita) => (
+                            <div className="list-item" key={cita.idCita}>
+                                <h3>{cita.nombreMedico}</h3>
+                                <p><strong>Especialidad:</strong> {cita.especialidad}</p>
+                                <p><strong>Fecha y hora:</strong> {new Date(cita.fechaHora).toLocaleString()}</p>
+                                <p><strong>Estado:</strong> <span className="badge">{cita.estado}</span></p>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="empty-state">No tienes citas programadas.</div>
                 )}
             </section>
         </DashboardLayout>

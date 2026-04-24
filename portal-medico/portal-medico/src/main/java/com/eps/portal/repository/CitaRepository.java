@@ -19,4 +19,7 @@ public interface CitaRepository extends JpaRepository<Cita, Long> {
             @Param("inicio") LocalDateTime inicio,
             @Param("fin") LocalDateTime fin
     );
+
+    // Obtener todas las citas de un paciente ordenadas por fecha (más recientes primero)
+    List<Cita> findByPacienteUsuarioEmailOrderByFechaHoraDesc(String email);
 }

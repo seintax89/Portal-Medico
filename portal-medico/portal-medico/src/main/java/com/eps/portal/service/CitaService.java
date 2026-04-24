@@ -97,4 +97,17 @@ public class CitaService {
                 .estado(citaGuardada.getEstado())
                 .build();
     }
+
+    public java.util.List<CitaResponse> obtenerMisCitas(String email) {
+        return citaRepository.findByPacienteUsuarioEmailOrderByFechaHoraDesc(email).stream()
+                .map(cita -> CitaResponse.builder()
+                        .idCita(cita.getId())
+                        .nombrePaciente(cita.getPaciente().getNombres() + " " + cita.getPaciente().getApellidos())
+                        .nombreMedico("Dr. " + cita.getMedico().getNombres() + " " + cita.getMedico().getApellidos())
+                        .especialidad(cita.getMedico().getEspecialidad().getNombre())
+                        .fechaHora(cita.getFechaHora())
+                        .estado(cita.getEstado())
+                        .build())
+                .toList();
+    }
 }

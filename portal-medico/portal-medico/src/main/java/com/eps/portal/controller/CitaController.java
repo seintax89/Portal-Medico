@@ -38,4 +38,12 @@ public class CitaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @GetMapping("/mis-citas")
+    @PreAuthorize("hasRole('PACIENTE')")
+    public ResponseEntity<java.util.List<CitaResponse>> obtenerMisCitas(Authentication authentication) {
+        // authentication.getName() devuelve el email del usuario logueado según UserDetailsServiceImpl
+        String email = authentication.getName();
+        return ResponseEntity.ok(citaService.obtenerMisCitas(email));
+    }
 }

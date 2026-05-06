@@ -1,4 +1,4 @@
-﻿package com.eps.portal.config;
+package com.eps.portal.config;
 
 import com.eps.portal.entity.Especialidad;
 import com.eps.portal.entity.Role;

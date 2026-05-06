@@ -1,4 +1,4 @@
-﻿package com.eps.portal.repository;
+package com.eps.portal.repository;
 
 import com.eps.portal.entity.FormulaMedica;
 import org.springframework.data.jpa.repository.JpaRepository;

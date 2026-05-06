@@ -1,4 +1,4 @@
-﻿package com.eps.portal.controller;
+package com.eps.portal.controller;
 
 import com.eps.portal.dto.response.PacienteResponse;
 import com.eps.portal.service.PacienteService; // Deberás crear este servicio

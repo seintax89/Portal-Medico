@@ -7,7 +7,10 @@ import java.util.List;
 public interface FormulaMedicaRepository extends JpaRepository<FormulaMedica, Long> {
     // Útil si en el futuro queremos ver qué medicinas le mandaron en una consulta específica
     List<FormulaMedica> findByHistorialClinicoId(Long historialClinicoId);
+<<<<<<< HEAD
 
     // Obtener medicinas del paciente
     List<FormulaMedica> findByHistorialClinicoPacienteUsuarioEmailOrderByHistorialClinicoFechaRegistroDesc(String email);
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 }

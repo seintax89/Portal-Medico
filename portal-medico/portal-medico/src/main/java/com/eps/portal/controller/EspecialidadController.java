@@ -1,6 +1,7 @@
 package com.eps.portal.controller;
 
 import com.eps.portal.entity.Especialidad;
+<<<<<<< HEAD
 import com.eps.portal.entity.OrdenEspecialidad;
 import com.eps.portal.entity.Paciente;
 import com.eps.portal.entity.Usuario;
@@ -12,11 +13,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+=======
+import com.eps.portal.repository.EspecialidadRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 import java.util.List;
 
 @RestController
@@ -27,14 +36,18 @@ public class EspecialidadController {
     // Nota: Como es un catálogo simple (solo lectura), es aceptable usar el Repository
     // directamente aquí sin pasar por un Service.
     private final EspecialidadRepository especialidadRepository;
+<<<<<<< HEAD
     private final PacienteRepository pacienteRepository;
     private final UsuarioRepository usuarioRepository;
     private final OrdenEspecialidadRepository ordenEspecialidadRepository;
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 
     @GetMapping
     public ResponseEntity<List<Especialidad>> listarEspecialidades() {
         return ResponseEntity.ok(especialidadRepository.findAll());
     }
+<<<<<<< HEAD
 
     @GetMapping("/disponibles")
     @PreAuthorize("hasRole('PACIENTE')")
@@ -65,4 +78,6 @@ public class EspecialidadController {
 
         return ResponseEntity.ok(disponibles);
     }
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 }

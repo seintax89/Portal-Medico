@@ -46,6 +46,7 @@ public class CitaController {
         String email = authentication.getName();
         return ResponseEntity.ok(citaService.obtenerMisCitas(email));
     }
+<<<<<<< HEAD
 
     @PutMapping("/{id}/cancelar")
     @PreAuthorize("hasRole('PACIENTE')")
@@ -58,4 +59,6 @@ public class CitaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 }

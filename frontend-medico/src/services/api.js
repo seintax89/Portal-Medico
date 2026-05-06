@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://portal-medico-uicj.onrender.com/api',
+    baseURL: import.meta.env.VITE_API_URL || 'https://portal-medico-uicj.onrender.com/api',
     headers: {
         'Content-Type': 'application/json'
     }

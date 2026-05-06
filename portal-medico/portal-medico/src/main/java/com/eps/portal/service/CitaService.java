@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +28,9 @@ public class CitaService {
     private final EspecialidadRepository especialidadRepository;
     private final OrdenEspecialidadRepository ordenEspecialidadRepository;
 
-    @Transactional // Si falla alguna regla, deshace cualquier cambio en BD
+    @Transactional
     public CitaResponse agendarCita(CitaRequest request, String rolUsuarioLogueado) {
 
-        // 1. Validar que existan el paciente y el médico
         Paciente paciente = pacienteRepository.findById(request.getPacienteId())
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
 
@@ -41,9 +39,9 @@ public class CitaService {
 
         LocalDateTime fechaHoraCita = request.getFechaHora();
 
-        // Horario EPS
         int horaCita = fechaHoraCita.getHour();
         int diaSemana = fechaHoraCita.getDayOfWeek().getValue();
+
         if (diaSemana > 5) {
             throw new RuntimeException("La EPS no atiende fines de semana.");
         }
@@ -58,7 +56,6 @@ public class CitaService {
         boolean esPediatria = "PEDIATRIA".equalsIgnoreCase(especialidad.getNombre());
         boolean esMedGeneral = "MEDICINA_GENERAL".equalsIgnoreCase(especialidad.getNombre());
         
-        // Validación de especialidad base
         if (!esAdulto && esMedGeneral) {
             throw new RuntimeException("Los pacientes infantiles deben agendar en PEDIATRÍA, no en Medicina General.");
         }
@@ -77,7 +74,6 @@ public class CitaService {
                     .orElseThrow(() -> new RuntimeException("No tienes una orden activa para agendar en esta especialidad (" + especialidad.getNombre() + ")."));
         }
 
-        // Asignación automática de médico
         java.util.List<Medico> medicosEspecialidad = medicoRepository.findAll().stream()
                 .filter(m -> m.getEspecialidad().getId().equals(especialidad.getId()))
                 .toList();
@@ -99,9 +95,6 @@ public class CitaService {
             throw new RuntimeException("No hay médicos disponibles para la fecha y hora seleccionadas en esa especialidad.");
         }
 
-        // ====================================================================
-        // Si pasa todas las validaciones, creamos la Cita
-        // ====================================================================
         Cita nuevaCita = new Cita();
         nuevaCita.setPaciente(paciente);
         nuevaCita.setMedico(medicoAsignado);

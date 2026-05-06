@@ -6,12 +6,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+<<<<<<< HEAD
 import com.eps.portal.dto.request.ActualizarPerfilRequest;
 import com.eps.portal.dto.response.MedicamentoRecetadoResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +35,7 @@ public class PacienteController {
         PacienteResponse perfil = pacienteService.obtenerPerfilPorEmail(emailUsuario);
         return ResponseEntity.ok(perfil);
     }
+<<<<<<< HEAD
 
     @PutMapping("/mi-perfil")
     @PreAuthorize("hasRole('PACIENTE')")
@@ -46,4 +51,6 @@ public class PacienteController {
         String emailUsuario = authentication.getName();
         return ResponseEntity.ok(pacienteService.obtenerMisMedicamentos(emailUsuario));
     }
+=======
+>>>>>>> 8d309450ee6cafb15dbbb0fd50fd29c0420e8f99
 }

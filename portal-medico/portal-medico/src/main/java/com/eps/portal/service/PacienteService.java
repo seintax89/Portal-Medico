@@ -10,6 +10,8 @@ import com.eps.portal.repository.PacienteRepository;
 import com.eps.portal.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +21,7 @@ public class PacienteService {
     private final UsuarioRepository usuarioRepository;
     private final PacienteRepository pacienteRepository;
     private final FormulaMedicaRepository formulaMedicaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public PacienteResponse obtenerPerfilPorEmail(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email)
@@ -38,29 +41,34 @@ public class PacienteService {
                 .build();
     }
 
+    @Transactional
     public PacienteResponse actualizarPerfil(String email, ActualizarPerfilRequest request) {
         Usuario usuario = usuarioRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         Paciente paciente = pacienteRepository.findById(usuario.getId())
                 .orElseThrow(() -> new RuntimeException("Perfil de paciente no encontrado"));
 
-        paciente.setNombres(request.getNombres());
-        paciente.setApellidos(request.getApellidos());
-        paciente.setNumeroDocumento(request.getNumeroDocumento());
-        if(request.getFechaNacimiento() != null) {
-            paciente.setFechaNacimiento(request.getFechaNacimiento());
+        // Verificar si el nuevo correo ya está en uso por otro usuario
+        if (!usuario.getEmail().equals(request.getEmail()) && usuarioRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("El correo ya está en uso por otro usuario.");
         }
 
-        Paciente pacienteActualizado = pacienteRepository.save(paciente);
+        usuario.setEmail(request.getEmail());
+        
+        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
+            usuario.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+
+        usuarioRepository.save(usuario);
 
         return PacienteResponse.builder()
-                .id(pacienteActualizado.getUsuarioId())
+                .id(paciente.getUsuarioId())
                 .email(usuario.getEmail())
-                .nombres(pacienteActualizado.getNombres())
-                .apellidos(pacienteActualizado.getApellidos())
-                .numeroDocumento(pacienteActualizado.getNumeroDocumento())
-                .fechaNacimiento(pacienteActualizado.getFechaNacimiento())
-                .tipoPaciente(pacienteActualizado.getTipoPaciente())
+                .nombres(paciente.getNombres())
+                .apellidos(paciente.getApellidos())
+                .numeroDocumento(paciente.getNumeroDocumento())
+                .fechaNacimiento(paciente.getFechaNacimiento())
+                .tipoPaciente(paciente.getTipoPaciente())
                 .build();
     }
 

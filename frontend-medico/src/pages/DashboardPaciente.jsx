@@ -6,10 +6,8 @@ const DashboardPaciente = () => {
     const [perfil, setPerfil] = useState(null);
     const [modoEdicion, setModoEdicion] = useState(false);
     const [formData, setFormData] = useState({
-        nombres: '',
-        apellidos: '',
-        numeroDocumento: '',
-        fechaNacimiento: ''
+        email: '',
+        password: ''
     });
 
     const [especialidades, setEspecialidades] = useState([]);
@@ -29,10 +27,8 @@ const DashboardPaciente = () => {
             const perfilRes = await api.get('/pacientes/mi-perfil');
             setPerfil(perfilRes.data);
             setFormData({
-                nombres: perfilRes.data.nombres,
-                apellidos: perfilRes.data.apellidos,
-                numeroDocumento: perfilRes.data.numeroDocumento,
-                fechaNacimiento: perfilRes.data.fechaNacimiento
+                email: perfilRes.data.email,
+                password: ''
             });
         } catch (err) {
             setError(err.response?.data?.mensaje || 'No se pudo cargar la información del paciente.');
@@ -83,7 +79,7 @@ const DashboardPaciente = () => {
             const res = await api.put('/pacientes/mi-perfil', formData);
             setPerfil(res.data);
             setModoEdicion(false);
-            setMensaje('Perfil actualizado exitosamente.');
+            setMensaje('Perfil actualizado exitosamente. Si cambiaste tus credenciales, deberás iniciar sesión nuevamente la próxima vez.');
         } catch (err) {
             const msg = typeof err.response?.data === 'string' ? err.response.data : err.response?.data?.mensaje;
             setError(msg || 'Error al actualizar el perfil.');
@@ -162,19 +158,27 @@ const DashboardPaciente = () => {
                         <form onSubmit={handleActualizarPerfil} style={{ marginTop: '1rem' }}>
                             <div className="form-group">
                                 <label>Nombres</label>
-                                <input required value={formData.nombres} onChange={e => setFormData({...formData, nombres: e.target.value})} />
+                                <input disabled value={perfil.nombres} />
                             </div>
                             <div className="form-group">
                                 <label>Apellidos</label>
-                                <input required value={formData.apellidos} onChange={e => setFormData({...formData, apellidos: e.target.value})} />
+                                <input disabled value={perfil.apellidos} />
                             </div>
                             <div className="form-group">
                                 <label>Documento</label>
-                                <input required value={formData.numeroDocumento} onChange={e => setFormData({...formData, numeroDocumento: e.target.value})} />
+                                <input disabled value={perfil.numeroDocumento} />
                             </div>
                             <div className="form-group">
                                 <label>Fecha de Nacimiento</label>
-                                <input type="date" required value={formData.fechaNacimiento} onChange={e => setFormData({...formData, fechaNacimiento: e.target.value})} />
+                                <input type="date" disabled value={perfil.fechaNacimiento} />
+                            </div>
+                            <div className="form-group">
+                                <label>Correo Electrónico (Editable)</label>
+                                <input type="email" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+                            </div>
+                            <div className="form-group">
+                                <label>Nueva Contraseña (Editable)</label>
+                                <input type="password" placeholder="Dejar en blanco para no cambiar" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} />
                             </div>
                             <div style={{ display: 'flex', gap: '10px' }}>
                                 <button type="submit" className="btn-primary" disabled={cargando}>Guardar</button>

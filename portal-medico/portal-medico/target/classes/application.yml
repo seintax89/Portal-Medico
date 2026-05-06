@@ -1,0 +1,28 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres?user=postgres.fvmrqnaajwwahgcgyzhx&password=Dasafego2007
+    username: postgres.fvmrqnaajwwahgcgyzhx
+    password: Dasafego2007
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+      idle-timeout: 10000
+      connection-timeout: 20000
+      max-lifetime: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+app:
+  security:
+    jwtSecret: "kOZx/sJ7t/TWVG1qm2aXQ0gcqCu2Gym4UiaQZqj0l+c="
+    jwtExpirationMs: 86400000

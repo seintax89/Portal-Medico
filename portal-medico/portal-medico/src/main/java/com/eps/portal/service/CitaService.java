@@ -34,7 +34,7 @@ public class CitaService {
         Paciente paciente = pacienteRepository.findById(request.getPacienteId())
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado"));
 
-        Especialidad especialidad = especialidadRepository.findById(request.getEspecialidadId())
+        Especialidad especialidad = especialidadRepository.findById(request.getEspecialidadId().intValue())
                 .orElseThrow(() -> new RuntimeException("Especialidad no encontrada"));
 
         LocalDateTime fechaHoraCita = request.getFechaHora();

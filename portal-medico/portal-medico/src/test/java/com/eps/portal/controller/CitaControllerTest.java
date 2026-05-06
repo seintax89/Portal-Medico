@@ -50,7 +50,7 @@ class CitaControllerTest {
     private CitaRequest buildCitaRequest() {
         CitaRequest req = new CitaRequest();
         req.setPacienteId(1L);
-        req.setMedicoId(2L);
+        req.setEspecialidadId(2L);
         // Fecha futura válida: próximo lunes a las 10 AM
         LocalDateTime fechaFutura = LocalDateTime.now().plusDays(8)
                 .withHour(10).withMinute(0).withSecond(0).withNano(0);

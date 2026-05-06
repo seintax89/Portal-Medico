@@ -66,6 +66,7 @@ class IntegracionCitasTest {
     private static Long idCita;
     private static Long idPaciente;
     private static Long idMedico;
+    private static Long idEspecialidad;
     private static boolean datosInicializados = false;
 
     /**
@@ -93,6 +94,7 @@ class IntegracionCitasTest {
                     e.setNombre("MEDICINA_GENERAL");
                     return especialidadRepository.save(e);
                 });
+        idEspecialidad = Long.valueOf(espGeneral.getId());
 
         // 3. Usuario + Paciente (solo si no existen)
         if (usuarioRepository.findByEmail("intcitas.paciente@test.com").isEmpty()) {
@@ -204,7 +206,7 @@ class IntegracionCitasTest {
 
         CitaRequest req = new CitaRequest();
         req.setPacienteId(idPaciente);
-        req.setMedicoId(idMedico);
+        req.setEspecialidadId(idEspecialidad);
         req.setFechaHora(proximoLunesA(9));
 
         MvcResult result = mockMvc.perform(post("/api/citas")
@@ -243,7 +245,7 @@ class IntegracionCitasTest {
 
         CitaRequest req = new CitaRequest();
         req.setPacienteId(idPaciente);
-        req.setMedicoId(idMedico);
+        req.setEspecialidadId(idEspecialidad);
         req.setFechaHora(citaExistente.getFechaHora()); // misma hora
 
         mockMvc.perform(post("/api/citas")

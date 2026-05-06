@@ -94,7 +94,7 @@ class CitaServiceTest {
         CitaRequest req = buildCitaRequest(10L, 1L, fechaValida);
 
         when(pacienteRepository.findById(10L)).thenReturn(Optional.of(pacienteAdulto));
-        when(especialidadRepository.findById(1L)).thenReturn(Optional.of(espGeneral));
+        when(especialidadRepository.findById(1)).thenReturn(Optional.of(espGeneral));
         when(medicoRepository.findAll()).thenReturn(List.of(medicoGeneral, medicoPediatra, medicoCardiologo));
         when(citaRepository.existsByMedicoUsuarioIdAndFechaHora(anyLong(), any())).thenReturn(false);
         when(citaRepository.save(any(Cita.class))).thenAnswer(inv -> copiarCitaConId(inv.getArgument(0), 1L));
@@ -113,7 +113,7 @@ class CitaServiceTest {
         CitaRequest req = buildCitaRequest(10L, 1L, sabado);
 
         when(pacienteRepository.findById(10L)).thenReturn(Optional.of(pacienteAdulto));
-        when(especialidadRepository.findById(1L)).thenReturn(Optional.of(espGeneral));
+        when(especialidadRepository.findById(1)).thenReturn(Optional.of(espGeneral));
 
         assertThatThrownBy(() -> citaService.agendarCita(req, "ROLE_PACIENTE"))
                 .isInstanceOf(RuntimeException.class)
@@ -127,7 +127,7 @@ class CitaServiceTest {
         CitaRequest req = buildCitaRequest(10L, 1L, fechaValida);
 
         when(pacienteRepository.findById(10L)).thenReturn(Optional.of(pacienteAdulto));
-        when(especialidadRepository.findById(1L)).thenReturn(Optional.of(espGeneral));
+        when(especialidadRepository.findById(1)).thenReturn(Optional.of(espGeneral));
         when(medicoRepository.findAll()).thenReturn(List.of(medicoGeneral));
         when(citaRepository.existsByMedicoUsuarioIdAndFechaHora(anyLong(), any())).thenReturn(true);
 
@@ -143,7 +143,7 @@ class CitaServiceTest {
         CitaRequest req = buildCitaRequest(11L, 2L, fechaValida);
 
         when(pacienteRepository.findById(11L)).thenReturn(Optional.of(pacienteNino));
-        when(especialidadRepository.findById(2L)).thenReturn(Optional.of(espPediatria));
+        when(especialidadRepository.findById(2)).thenReturn(Optional.of(espPediatria));
         when(medicoRepository.findAll()).thenReturn(List.of(medicoPediatra));
         when(citaRepository.existsByMedicoUsuarioIdAndFechaHora(anyLong(), any())).thenReturn(false);
         when(citaRepository.save(any(Cita.class))).thenAnswer(inv -> copiarCitaConId(inv.getArgument(0), 2L));
@@ -161,7 +161,7 @@ class CitaServiceTest {
         CitaRequest req = buildCitaRequest(10L, 3L, fechaValida);
 
         when(pacienteRepository.findById(10L)).thenReturn(Optional.of(pacienteAdulto));
-        when(especialidadRepository.findById(3L)).thenReturn(Optional.of(espCardiologia));
+        when(especialidadRepository.findById(3)).thenReturn(Optional.of(espCardiologia));
         when(ordenEspecialidadRepository.findByPacienteUsuarioIdAndUsadaFalse(10L)).thenReturn(List.of());
 
         assertThatThrownBy(() -> citaService.agendarCita(req, "ROLE_PACIENTE"))

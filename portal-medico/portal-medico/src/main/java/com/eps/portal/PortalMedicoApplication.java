@@ -8,7 +8,10 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
+
 @SpringBootApplication
+@EnableScheduling
 public class PortalMedicoApplication {
 
 	public static void main(String[] args) {

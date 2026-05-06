@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://aws-1-us-east-2.pooler.supabase.com:5432/postgres?user=postgres.fvmrqnaajwwahgcgyzhx&password=Dasafego2007
-    username: postgres.fvmrqnaajwwahgcgyzhx
-    password: Dasafego2007
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 2
@@ -24,5 +24,5 @@ spring:
 
 app:
   security:
-    jwtSecret: "kOZx/sJ7t/TWVG1qm2aXQ0gcqCu2Gym4UiaQZqj0l+c="
+    jwtSecret: ${JWT_SECRET:secret_key_for_local_development_only_please_change_it}
     jwtExpirationMs: 86400000

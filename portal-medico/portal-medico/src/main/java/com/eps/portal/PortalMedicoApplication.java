@@ -1,4 +1,4 @@
-﻿package com.eps.portal;
+package com.eps.portal;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,14 +23,13 @@ public class PortalMedicoApplication {
 		return args -> {
 			try (Connection conn = dataSource.getConnection()) {
 				System.out.println("\n=======================================================");
-				System.out.println("âœ… Â¡Ã‰XITO! CONEXIÃ“N ESTABLECIDA CON SUPABASE POSTGRESQL");
+				System.out.println("✅ ¡ÉXITO! CONEXIÓN ESTABLECIDA CON SUPABASE POSTGRESQL");
 				System.out.println("=======================================================\n");
 			} catch (Exception e) {
-				System.out.println("\nâŒ ERROR AL CONECTAR CON LA BASE DE DATOS: " + e.getMessage() + "\n");
+				System.out.println("\n❌ ERROR AL CONECTAR CON LA BASE DE DATOS: " + e.getMessage() + "\n");
 			}
 		};
 	}
 
 
 }
-

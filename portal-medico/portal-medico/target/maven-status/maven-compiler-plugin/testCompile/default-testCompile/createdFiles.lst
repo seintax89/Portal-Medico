@@ -1,0 +1,10 @@
+com\eps\portal\service\PacienteServiceTest.class
+com\eps\portal\service\MedicoServiceTest.class
+com\eps\portal\service\AuthServiceTest.class
+com\eps\portal\service\CitaServiceTest.class
+com\eps\portal\controller\MedicoControllerTest.class
+com\eps\portal\PortalMedicoApplicationTests.class
+com\eps\portal\controller\CitaControllerTest.class
+com\eps\portal\integration\IntegracionCitasTest.class
+com\eps\portal\integration\IntegracionAuthTest.class
+com\eps\portal\controller\AuthControllerTest.class

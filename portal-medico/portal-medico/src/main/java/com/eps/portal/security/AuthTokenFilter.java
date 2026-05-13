@@ -1,4 +1,4 @@
-package com.eps.portal.security;
+﻿package com.eps.portal.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,7 +27,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            // Si hay token y es válido, autenticamos al usuario en este hilo
+            // Si hay token y es vÃ¡lido, autenticamos al usuario en este hilo
             if (jwt != null && jwtUtils.validarJwtToken(jwt)) {
                 String email = jwtUtils.obtenerEmailDelJwtToken(jwt);
 
@@ -39,14 +39,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                                 userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                // Guardamos la sesión en el contexto de Spring Security
+                // Guardamos la sesiÃ³n en el contexto de Spring Security
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            System.err.println("No se pudo establecer la autenticación del usuario: " + e.getMessage());
+            System.err.println("No se pudo establecer la autenticaciÃ³n del usuario: " + e.getMessage());
         }
 
-        // Dejamos pasar la petición al siguiente eslabón (Controlador)
+        // Dejamos pasar la peticiÃ³n al siguiente eslabÃ³n (Controlador)
         filterChain.doFilter(request, response);
     }
 

@@ -1,6 +1,6 @@
-package com.eps.portal.security;
+﻿package com.eps.portal.security;
 
-// IMPORTS EXPLÍCITOS (Muy importantes para evitar errores)
+// IMPORTS EXPLÃCITOS (Muy importantes para evitar errores)
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

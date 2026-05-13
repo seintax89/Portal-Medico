@@ -1,6 +1,6 @@
-package com.eps.portal.exception;
+﻿package com.eps.portal.exception;
 
-import com.eps.portal.dto.response.MensajeResponse;
+import com.eps.portal.modelo.dto.response.MensajeResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -29,12 +29,13 @@ public class GlobalExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new MensajeResponse("Errores de validación: " + errors.toString()));
+                .body(new MensajeResponse("Errores de validaciÃ³n: " + errors.toString()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<MensajeResponse> handleException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new MensajeResponse("Ocurrió un error inesperado: " + ex.getMessage()));
+                .body(new MensajeResponse("OcurriÃ³ un error inesperado: " + ex.getMessage()));
     }
 }
+

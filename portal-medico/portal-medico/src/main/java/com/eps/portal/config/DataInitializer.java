@@ -1,15 +1,15 @@
-package com.eps.portal.config;
+﻿package com.eps.portal.config;
 
-import com.eps.portal.entity.Especialidad;
-import com.eps.portal.entity.Role;
-import com.eps.portal.entity.Usuario;
-import com.eps.portal.entity.OrdenEspecialidad;
-import com.eps.portal.entity.Paciente;
-import com.eps.portal.repository.EspecialidadRepository;
-import com.eps.portal.repository.OrdenEspecialidadRepository;
-import com.eps.portal.repository.PacienteRepository;
-import com.eps.portal.repository.RoleRepository;
-import com.eps.portal.repository.UsuarioRepository;
+import com.eps.portal.modelo.entity.Especialidad;
+import com.eps.portal.modelo.entity.Role;
+import com.eps.portal.modelo.entity.Usuario;
+import com.eps.portal.modelo.entity.OrdenEspecialidad;
+import com.eps.portal.modelo.entity.Paciente;
+import com.eps.portal.modelo.repository.EspecialidadRepository;
+import com.eps.portal.modelo.repository.OrdenEspecialidadRepository;
+import com.eps.portal.modelo.repository.PacienteRepository;
+import com.eps.portal.modelo.repository.RoleRepository;
+import com.eps.portal.modelo.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -69,14 +69,14 @@ public class DataInitializer implements CommandLineRunner {
 
         System.out.println("Admin listo: admin@eps.com / Admin123*");
 
-        // 3. Crear especialidades por defecto si la tabla está vacía
+        // 3. Crear especialidades por defecto si la tabla estÃ¡ vacÃ­a
         if (especialidadRepository.count() == 0) {
             List<String> especialidadesNombres = List.of(
                     "Medicina General",
-                    "Cardiología",
-                    "Pediatría",
-                    "Dermatología",
-                    "Ginecología");
+                    "CardiologÃ­a",
+                    "PediatrÃ­a",
+                    "DermatologÃ­a",
+                    "GinecologÃ­a");
 
             for (String nombre : especialidadesNombres) {
                 Especialidad esp = new Especialidad();
@@ -90,7 +90,7 @@ public class DataInitializer implements CommandLineRunner {
         if (pacienteRepository.count() > 0 && ordenEspecialidadRepository.count() == 0) {
             Paciente p = pacienteRepository.findAll().get(0);
             Especialidad cardiologia = especialidadRepository.findAll().stream()
-                    .filter(e -> e.getNombre().equalsIgnoreCase("Cardiología"))
+                    .filter(e -> e.getNombre().equalsIgnoreCase("CardiologÃ­a"))
                     .findFirst().orElse(null);
             
             if (cardiologia != null) {
@@ -100,8 +100,9 @@ public class DataInitializer implements CommandLineRunner {
                 orden.setFechaEmision(LocalDateTime.now());
                 orden.setUsada(false);
                 ordenEspecialidadRepository.save(orden);
-                System.out.println("Orden de Cardiología creada para el paciente: " + p.getNombres());
+                System.out.println("Orden de CardiologÃ­a creada para el paciente: " + p.getNombres());
             }
         }
     }
 }
+

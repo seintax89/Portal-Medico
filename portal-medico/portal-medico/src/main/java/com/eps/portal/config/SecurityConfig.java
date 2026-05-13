@@ -1,4 +1,4 @@
-package com.eps.portal.config;
+﻿package com.eps.portal.config;
 
 import com.eps.portal.security.AuthTokenFilter;
 import com.eps.portal.security.UserDetailsServiceImpl;
@@ -52,13 +52,13 @@ public class SecurityConfig {
     }
 
     /**
-     * Configuración de CORS: Permite que tu Frontend (React) hable con el Backend.
+     * ConfiguraciÃ³n de CORS: Permite que tu Frontend (React) hable con el Backend.
      */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Se agregan múltiples dominios de frontend permitidos (agregar más si es
+        // Se agregan mÃºltiples dominios de frontend permitidos (agregar mÃ¡s si es
         // necesario)
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:5173", // Localhost Vite
@@ -69,7 +69,7 @@ public class SecurityConfig {
                 "https://portal-medico-uicj.onrender.com" // Render backend
         ));
 
-        // Métodos HTTP permitidos para CORS
+        // MÃ©todos HTTP permitidos para CORS
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
         // Cabeceras permitidas por CORS
@@ -79,7 +79,7 @@ public class SecurityConfig {
         // 'x-auth-token')
         configuration.setExposedHeaders(List.of("x-auth-token"));
 
-        // Permitir el envío de cookies con las peticiones
+        // Permitir el envÃ­o de cookies con las peticiones
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -89,7 +89,7 @@ public class SecurityConfig {
     }
 
     /**
-     * Cadena de Filtros: Define quién puede entrar y a dónde.
+     * Cadena de Filtros: Define quiÃ©n puede entrar y a dÃ³nde.
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -103,16 +103,16 @@ public class SecurityConfig {
 
                 // 3. Reglas de acceso a las rutas
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Registro y Login son públicos
-                        .requestMatchers("/api/especialidades").permitAll() // Catálogos son públicos
+                        .requestMatchers("/api/auth/**").permitAll() // Registro y Login son pÃºblicos
+                        .requestMatchers("/api/especialidades").permitAll() // CatÃ¡logos son pÃºblicos
                         .requestMatchers("/error").permitAll() // Vital para ver errores reales en consola
-                        .anyRequest().authenticated() // Todo lo demás requiere Token JWT
+                        .anyRequest().authenticated() // Todo lo demÃ¡s requiere Token JWT
                 )
 
-                // 4. Conectamos nuestro proveedor de autenticación
+                // 4. Conectamos nuestro proveedor de autenticaciÃ³n
                 .authenticationProvider(authenticationProvider())
 
-                // 5. Inyectamos nuestro filtro de Token ANTES del filtro de usuario/contraseña
+                // 5. Inyectamos nuestro filtro de Token ANTES del filtro de usuario/contraseÃ±a
                 .addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

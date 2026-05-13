@@ -1,7 +1,7 @@
-package com.eps.portal.security;
+﻿package com.eps.portal.security;
 
-import com.eps.portal.entity.Usuario;
-import com.eps.portal.repository.UsuarioRepository;
+import com.eps.portal.modelo.entity.Usuario;
+import com.eps.portal.modelo.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

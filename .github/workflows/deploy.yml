@@ -1,0 +1,71 @@
+name: Deploy Portal Médico
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Tag current commit before deployment
+        id: tag
+        run: |
+          TAG="pre-deploy-$(date +%Y%m%d%H%M%S)"
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+          git config --global user.email "ci@example.com"
+          git config --global user.name "CI Bot"
+          git tag $TAG
+          git push https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ github.repository }}.git $TAG
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+      - name: Deploy to Render (or your hosting)
+        id: deploy
+        run: |
+          # Aquí colocar el comando de despliegue real, por ejemplo:
+          # ./scripts/deploy.sh
+          echo "Ejecutando despliegue..."
+          # Simular fallo con exit 1 para pruebas
+          # exit 1
+        continue-on-error: true
+
+      - name: Rollback if deploy failed
+        if: steps.deploy.outcome == 'failure'
+        run: |
+          echo "Despliegue falló, revirtiendo al último commit estable"
+          git fetch origin main
+          git reset --hard HEAD~1
+          git push origin main --force
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+      - name: Clean up tag if deployment succeeded
+        if: steps.deploy.outcome == 'success'
+        run: |
+          echo "Despliegue exitoso, eliminando tag temporal"
+          git tag -d ${{ steps.tag.outputs.TAG }}
+          git push origin :refs/tags/${{ steps.tag.outputs.TAG }}
+        env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+

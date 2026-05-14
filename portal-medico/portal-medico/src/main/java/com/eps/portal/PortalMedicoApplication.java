@@ -1,0 +1,36 @@
+﻿package com.eps.portal;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+@EnableScheduling
+public class PortalMedicoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PortalMedicoApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner probarConexion(DataSource dataSource) {
+		return args -> {
+			try (Connection conn = dataSource.getConnection()) {
+				System.out.println("\n=======================================================");
+				System.out.println("âœ… Â¡Ã‰XITO! CONEXIÃ“N ESTABLECIDA CON SUPABASE POSTGRESQL");
+				System.out.println("=======================================================\n");
+			} catch (Exception e) {
+				System.out.println("\nâŒ ERROR AL CONECTAR CON LA BASE DE DATOS: " + e.getMessage() + "\n");
+			}
+		};
+	}
+
+
+}
+
